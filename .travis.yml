@@ -1,0 +1,16 @@
+sudo: required
+
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - echo "start Creating an image with dockerfile"
+  - docker build -t yjkim21/test -f Docerfile.dev .
+
+script:
+  - docker run -e CI=ture yjkim21/test npm run test -- --coverage
+
+after_success:
+  - echo "Test Sucess"
